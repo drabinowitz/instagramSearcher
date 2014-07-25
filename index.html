@@ -33,7 +33,9 @@
 
 			<p class="submission invalid" ng-if="submitted && instaForm.$invalid">Please enter a search term</p>
 
-			<p class="submission valid" ng-if="submitted && instaForm.$valid">Searching Instagram for photos tagged with "{{ keyword }}"</p>
+			<p class="valid" ng-if="submitted && instaForm.$valid">Searching Instagram for photos tagged with "{{ keyword }}"</p>
+
+			<p class="submission invalid" ng-if="error">It looks as though we couldn't reach Instagram please check if your network connection and try again</p>
 
 			</form>
 
@@ -41,7 +43,7 @@
 
 		<div class="row instagramSearchResults" ng-controller="instaResultsCtrl">
 
-			<p class="submission results" ng-if="keyword">showing {{ results.length }} for {{ keyword }}</p>
+			<p class="results" ng-if="keyword">showing {{ results.length }} for {{ keyword }}</p>
 			
 			<div class="col-md-4 instaImageWrapper" ng-repeat="result in results">
 			

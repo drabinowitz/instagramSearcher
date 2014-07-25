@@ -74,6 +74,10 @@ angular.module('instagramSearcher',['ngAnimate']).
 
 					$scope.submitted = false;
 
+					$scope.error = true;
+
+					console.log('bad');
+
 					notify('error');
 
 				});
