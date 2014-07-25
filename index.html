@@ -39,11 +39,13 @@
 
 		</div>
 
-		<div class="row instagramSearchResults">
+		<div class="row instagramSearchResults" ng-controller="instaResultsCtrl">
+
+			<p class="submission results" ng-if="keyword">showing {{ results.length }} for {{ keyword }}</p>
 			
-			<div class="col-md-4 instaImageWrapper">
-				
-				<a href=""><img src="" alt=""></a>
+			<div class="col-md-4 instaImageWrapper" ng-repeat="result in results">
+			
+				<a ng-href="{{ result.link }}" target="_blank"><img ng-src="{{ result.images.low_resolution.url }}" ></a>
 
 			</div>
 
