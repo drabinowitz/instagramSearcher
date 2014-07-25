@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app='madlibs'>
+<html ng-app='instagramSearcher'>
 <head>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -11,72 +11,41 @@
 
 	<div class="container">
 
-		<div class="row headerBar">
+		<div class="row logoHeader">
+
+			<div class="col-md-12">
 		
-			<div class="happyFace col-md-3">
-				
-				<img src="mad-lib-happy-face.png" alt="" class="happyFaceImage">
-
-			</div>
-
-			<div class="logo col-md-9">
-				
-				<img src="ng-mad-libs-logo.png" alt="" class="logoImage">
-
-				<h1 class="logoTitle">Automate This!</h1>
+				<img class="logoImage" src="images/ng-instagram.png" alt="">
 
 			</div>
 
 		</div>
 
-		<div ng-show="mlTab == 'input'" ng-controller="mlInputCtrl" class="row madLibsInputs">
-			
-			<h2>Provide the following words:</h2>
-
-			<form name="mlForm" ng-submit="submit()" novalidate>
-
-				<div ng-repeat="(name,madlib) in madlibs | orderObjectBy:'index'" class="col-md-4">
+		<div class="row instagramSearchBar" ng-controller="instaSearchCtrl">
+				
+			<form name="instaForm" class="instaForm col-md-12" ng-submit="instagramSearch(keyword)" novalidate>
 					
-					<input type="{{ madlib.type }}" name="{{ name }}" placeholder="{{ madlib.placeholder }}" ng-model="madlib.word" class="madlibsInput" ng-required="true">
+				<input type="text" placeholder="Enter a tag to search" ng-model="keyword" ng-required="true">
 
-				</div>
+				<input type="submit">
 
-				<label class="col-md-12 genderLabel" for="gender"><h3>Gender:</h3></label>
+			<p class="submission invalid" ng-if="submitted && instaForm.$invalid">Please enter a search term</p>
 
-				<div class="col-md-12">
-
-					<p class="gender">male:</p>
-
-					<input class="gender" type="radio" name="gender" value="male" ng-model="settings.gender" ng-checked="true">
-
-					<p class="gender">female:</p>
-
-					<input class="gender" type="radio" name="gender" value="female" ng-model="settings.gender">
-
-				</div>
-
-				<div class="mlSubmit col-md-12">
-
-					<p class="errorMessage" ng-if="submitted && mlForm.$invalid">Please fill out all fields and make sure to input a number in Huge Number</p>
-
-					<input class="mlSubmitButton" type="submit" value="Generate My Mad Lib">
-
-				</div>
+			<p class="submission valid" ng-if="submitted && instaForm.$valid">Searching Instagram for photos tagged with "{{ keyword }}"</p>
 
 			</form>
 
 		</div>
 
-		<div ng-show="mlTab == 'output'" ng-controller="mlOutputCtrl" class="row madlibsOutput">
-			<p>{{madlibs.name.word | uppercase}} was a {{madlibs.jobTitle.word | uppercase}} who loved technology. Although {{ "obj" | gender:settings.gender }} loved parts of {{ "poss" | gender:settings.gender }} job, {{ "obj" | gender:settings.gender }} absolutely hated  {{madlibs.tediousTask.word | uppercase}} and {{madlibs.dirtyTask.word | uppercase}}. So, {{madlibs.name.word | uppercase}} met with {{ "poss" | gender:settings.gender }} life mentor {{madlibs.celebrity.word | uppercase}} who told {{ "subj" | gender:settings.gender }} to learn how to {{madlibs.uselessSkill.word | uppercase}} with Thinkful. Thinkful didn't offer a course on {{madlibs.uselessSkill.word | uppercase}} so {{ "obj" | gender:settings.gender }} studied programming instead.</p>
- 
-			<p>What a great decision! With {{ "poss" | gender:settings.gender }} new skills, {{madlibs.name.word | uppercase}} built a(n) {{madlibs.adjective.word | uppercase}} robot named {{madlibs.obnoxiousCelebrity.word | uppercase}} that not only loved {{madlibs.dirtyTask.word | uppercase}} but did it {{madlibs.hugeNumber.word | uppercase}} faster. 
-			</p>
+		<div class="row instagramSearchResults">
+			
+			<div class="col-md-4 instaImageWrapper">
+				
+				<a href=""><img src="" alt=""></a>
 
-			<button class="resetButton" ng-click="reset()">Reset?</button>
+			</div>
+
 		</div>
-
-	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 

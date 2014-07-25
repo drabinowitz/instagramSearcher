@@ -1,6 +1,8 @@
-angular.module('myApp',[]).
+angular.module('instagramSearcher',[]).
 	
-	controller('myCtrl',function($scope,$timeout,$q,$http){
+	controller('instaSearchCtrl',function($scope,$timeout,$q,$http){
+
+		$scope.submitted = false;
 
 		function wait() {
 
@@ -16,40 +18,28 @@ angular.module('myApp',[]).
 
 		};
 
-		function notify(){
+		$scope.instagramSearch = function(keyword){
 
-			$scope.notifySaved = true;
+			$scope.submitted = true;
 
-			wait().then(function(){
+			if($scope.instaForm.$valid){
 
-				$scope.notifySaved = false;
+				wait().then(function(){
 
-			});
+					$scope.submitted = false;
 
-		}
+				})
 
-	    $scope.saveSettings = function() {
+			} else {
 
-	    	$http.put('api/update_password', $scope.data).
+				wait().then(function(){
 
-    		success(function(){
+					$scope.submitted = false;
 
-        		notify();
+				});
 
-        	}).
+			}
 
-        	error(function() {
-
-        		$scope.error = true;
-
-        		wait().then(function(){
-
-        			$scope.error = false;
-
-        		});
-
-        	});
-    
-	    };
+		};
 
 	});
